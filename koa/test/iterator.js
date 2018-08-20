@@ -24,12 +24,23 @@
 //生成器
 function * makeIterator(arr) {
   for (let i = 0; i < arr.length; i++) {
-    yield arr[i]
+    yield arr[i].age
   }
 }
 
-const it = makeIterator(['aa', 'bb', 'cc'])
+
+
+const it = makeIterator([{
+  name:'aa',
+  age: 15
+}, {
+  name:'bb',
+  age: 16
+}, {
+  name:'cc',
+  age: 17
+}])
 console.log('首先', it.next().value)
 console.log('然后', it.next().value)
 console.log('最后', it.next().value)
-console.log('最后', it.next().value)
+console.log('最后', it.next().done)
