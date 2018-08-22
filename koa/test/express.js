@@ -8,19 +8,19 @@ var indentt = function (n) {
 const mid1 = (req, res, next) => {
   res.body = '<h3>请求 => 第一层</h3>'
   next()
-  res.body += '<h3>响应 <= 第一层</h3>'
+  res.body += '<h3>响应 <= 第一层</h3>' //express 单纯的手段是走不到这里的，不会像koa的杨总模型一步一步进去再一步一步出来
 }
 
 const mid2 = (req, res, next) => {
   res.body += `<h3>${indentt(4)}请求 => 第二层</h3>`
   next()
-  res.body += `<h3>${indentt(4)}响应 <= 第二层</h3>`
+  res.body += `<h3>${indentt(4)}响应 <= 第二层</h3>`  //这里也是走不到的
 }
 
 const mid3 = (req, res, next) => {
   res.body += `<h3>${indentt(8)}请求 => 第三层</h3>`
   next()
-  res.body += `<h3>${indentt(8)}响应 <= 第三层</h3>`
+  res.body += `<h3>${indentt(8)}响应 <= 第三层</h3>`  //这里走不到
 }
 
 app.use(mid1)
