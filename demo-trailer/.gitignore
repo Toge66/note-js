@@ -34,8 +34,7 @@ node_modules
 .idea/
 
 build/
-koa/dist/
-demo-trailer/dist/
+dist/
 
 lib
 node_modules
@@ -52,4 +51,4 @@ gulpfile-desktop.js
 .DS_Store
 *.lock
 
-
+_book
