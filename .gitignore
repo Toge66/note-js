@@ -34,6 +34,7 @@ node_modules
 .idea/
 
 build/
+koa/dist/
 
 lib
 node_modules
