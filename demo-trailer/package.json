@@ -7,10 +7,12 @@
     "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "toge",
+  "author": "Toge",
   "license": "MIT",
   "dependencies": {
-    "koa": "^2.5.2"
+    "koa": "^2.5.2",
+    "koa-views": "^6.1.4",
+    "pug": "^2.0.3"
   },
   "devDependencies": {
     "koa-logger": "^3.2.0"
