@@ -13,8 +13,8 @@ module.exports = `
       <div class="container">
         <div class="row">
           <div class="col-md-8">
-            <h1>Hello world</h1>
-            <p>This is First</p>
+            <h1><%= data.first %></h1>
+            <p><%= data.second %></p>
           </div>
           <div class="col-md-4">
             <p>测试静态 HTML 页面</p>
