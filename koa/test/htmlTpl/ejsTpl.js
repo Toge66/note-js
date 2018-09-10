@@ -17,7 +17,7 @@ module.exports = `
             <p><%= data.second %></p>
           </div>
           <div class="col-md-4">
-            <p>测试静态 HTML 页面</p>
+            <p>测试动态 Ejs</p>
           </div>
         </div>
       </div>
