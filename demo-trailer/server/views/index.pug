@@ -98,7 +98,7 @@ block content
       .col-12.col-md-9.col-xl-9.py-md-3.pl-md-5.content
         .row
           .col-md-6
-            img.card-imag-top(src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
+            img.card-imag-top( width='100%' src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
             data-video="https://lmbsy.qq.com/flv/223/111/r0773nxhly9.p212.1.mp4?sdtfrom=v1010&guid=49ca00f84974668ca693f324df9b1b07&vkey=0DF5A1452D0F26075C31C5648B4E397F9B09E809A282FAC674F41AD7AC5F751D7FCFCFF84E200D764D2A1D4D13E3ADFC64745056BF35930F80430D36BCB4D09BC600BC7042F716A86F2286BB8F89A8EDE75806A012040EE19F0E0CEDAFF96B1CDADA21F8C91A43CEEBC45111F43DF434A24338BC7AE4922F")
             .card-body
               h4.card-title 电影标题
@@ -106,7 +106,7 @@ block content
             .card-footer
               small.text-muted 1 天前更新
           .col-md-6
-            img.card-imag-top(src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
+            img.card-imag-top(width='100%' src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
             data-video="https://lmbsy.qq.com/flv/223/111/r0773nxhly9.p212.1.mp4?sdtfrom=v1010&guid=49ca00f84974668ca693f324df9b1b07&vkey=0DF5A1452D0F26075C31C5648B4E397F9B09E809A282FAC674F41AD7AC5F751D7FCFCFF84E200D764D2A1D4D13E3ADFC64745056BF35930F80430D36BCB4D09BC600BC7042F716A86F2286BB8F89A8EDE75806A012040EE19F0E0CEDAFF96B1CDADA21F8C91A43CEEBC45111F43DF434A24338BC7AE4922F")
             .card-body
               h4.card-title 电影标题
@@ -115,18 +115,61 @@ block content
               small.text-muted 1 天前更新
         .row
           .col-md-6
-            img.card-imag-top(src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
+            img.card-imag-top(width='100%' src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
             data-video="https://lmbsy.qq.com/flv/223/111/r0773nxhly9.p212.1.mp4?sdtfrom=v1010&guid=49ca00f84974668ca693f324df9b1b07&vkey=0DF5A1452D0F26075C31C5648B4E397F9B09E809A282FAC674F41AD7AC5F751D7FCFCFF84E200D764D2A1D4D13E3ADFC64745056BF35930F80430D36BCB4D09BC600BC7042F716A86F2286BB8F89A8EDE75806A012040EE19F0E0CEDAFF96B1CDADA21F8C91A43CEEBC45111F43DF434A24338BC7AE4922F")
             .card-body
-              h4.card-title 电影标题
-              p.card-desc   电影描述
-            .card-footer
-              small.text-muted 1 天前更新
+              h4.card-title 电影标题 
+              p.card-desc   电影描述 
+            .card-footer 
+              small.text-muted 1 天前更新 
           .col-md-6
-            img.card-imag-top(src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
+            img.card-imag-top(width='100%' src="https://img1.doubanio.com/view/photo/l/public/p2531286907.webp", 
             data-video="https://lmbsy.qq.com/flv/223/111/r0773nxhly9.p212.1.mp4?sdtfrom=v1010&guid=49ca00f84974668ca693f324df9b1b07&vkey=0DF5A1452D0F26075C31C5648B4E397F9B09E809A282FAC674F41AD7AC5F751D7FCFCFF84E200D764D2A1D4D13E3ADFC64745056BF35930F80430D36BCB4D09BC600BC7042F716A86F2286BB8F89A8EDE75806A012040EE19F0E0CEDAFF96B1CDADA21F8C91A43CEEBC45111F43DF434A24338BC7AE4922F")
             .card-body
               h4.card-title 电影标题
               p.card-desc   电影描述
             .card-footer
               small.text-muted 1 天前更新
+  #myModal.modal.fade.bd-example-modal-lg(tabindex="-1", role="dialog", aria-labelledby="myLargeModalLabel", aria-hidden="true")
+    .modal-dialog.modal-lg
+      #videoModal.modal-content
+
+  include ./includes/script
+  script.
+    var player = null;
+    $(document).ready(function() {
+      console.log('ready')
+      $('#myModal').on('hidden.bs.modal', function (e) {
+        if (player && player.pause) player.pause()
+      })
+      
+      console.log($('.card-imag-top'));
+      console.log($('#myModal'));
+      $('.card-imag-top').click(function (e) {
+        console.log('click:card-img-top')
+        var video = $(this).data('video')
+        var image = $(this).attr('src')
+
+        $('#myModal').modal('show')
+
+        if (!player) {
+          player = new DPlayer({
+            container: document.getElementById('videoModal'),
+            screenshot: true,
+            video: {
+              url: video,
+              pic: image,
+              thumbnails: image
+            }
+          })
+        } else {
+          if (play.video.currentSrc !== video) {
+            player.switchVideo({
+              url: video,
+              pic: image,
+              type: 'auto'
+            })
+          }
+        }
+      })
+    })
