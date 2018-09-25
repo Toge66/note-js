@@ -138,15 +138,10 @@ block content
   script.
     var player = null;
     $(document).ready(function() {
-      console.log('ready')
       $('#myModal').on('hidden.bs.modal', function (e) {
         if (player && player.pause) player.pause()
       })
-      
-      console.log($('.card-imag-top'));
-      console.log($('#myModal'));
       $('.card-imag-top').click(function (e) {
-        console.log('click:card-img-top')
         var video = $(this).data('video')
         var image = $(this).attr('src')
 
@@ -163,7 +158,7 @@ block content
             }
           })
         } else {
-          if (play.video.currentSrc !== video) {
+          if (player.video.currentSrc !== video) {
             player.switchVideo({
               url: video,
               pic: image,
