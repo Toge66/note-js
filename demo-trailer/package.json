@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
+    "build": "parcel build parcel/index.html --no-cache -d parcel/dist --public-url /dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Toge",
@@ -12,9 +13,11 @@
   "dependencies": {
     "koa": "^2.5.2",
     "koa-views": "^6.1.4",
+    "parcel-bundler": "^1.9.7",
     "pug": "^2.0.3"
   },
   "devDependencies": {
-    "koa-logger": "^3.2.0"
+    "koa-logger": "^3.2.0",
+    "koa-static": "^5.0.0"
   }
 }
