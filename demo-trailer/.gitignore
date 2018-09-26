@@ -36,6 +36,8 @@ node_modules
 build/
 dist/
 dist2/
+*/dist/
+*/dist2/
 
 lib
 node_modules
