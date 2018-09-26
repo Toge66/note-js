@@ -3,16 +3,16 @@ const puppeteer = require('puppeteer')
 
 const sleep = time => new Promise(resolve => {
     setTimeout(resolve, time)
-})
-;(async() => {
-    
+});
+(async () => {
+
     const browser = await puppeteer.launch({
-        args:['--no-sandbox'],
+        args: ['--no-sandbox'],
         dumpio: false
     })
     const page = await browser.newPage()
-    await page.goto(url,{
-        waitUntil: "networkidle2"               //网络空闲的时候执行
+    await page.goto(url, {
+        waitUntil: "networkidle2" //网络空闲的时候执行
     })
 
     // await sleep(3000)
@@ -23,7 +23,7 @@ const sleep = time => new Promise(resolve => {
         await sleep(2000)
         await page.click('.more')
     }
-    
+
     const result = await page.evaluate(_ => {
         var $ = window.$
         var items = $('.list-wp a')
@@ -34,7 +34,7 @@ const sleep = time => new Promise(resolve => {
                 let id = it.find('div').data('id')
                 let title = it.find('.title').text()
                 let rate = Number(it.find('.rate').text())
-                let poster = it.find('img').attr('src').replace('s_ratio','l_ratio')
+                let poster = it.find('img').attr('src').replace('s_ratio', 'l_ratio')
                 links.push({
                     id,
                     title,
@@ -47,6 +47,6 @@ const sleep = time => new Promise(resolve => {
     })
 
     browser.close()
-    console.log(result,result.length);
-    
+    process.send(result)
+    process.exit(0)
 })()
