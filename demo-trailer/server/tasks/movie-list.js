@@ -3,9 +3,8 @@ const {
     resolve
 } = require('path')
 
-;
-(async () => {
-    const script = resolve(__dirname, '../crawler/trailer-list')
+;(async () => {
+    const script = resolve(__dirname, '../crawler/movie-list')
     const child = cp.fork(script)
     let invoked = false
     child.on('error', err => {

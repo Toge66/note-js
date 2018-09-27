@@ -3,8 +3,8 @@ const puppeteer = require('puppeteer')
 
 const sleep = time => new Promise(resolve => {
     setTimeout(resolve, time)
-});
-(async () => {
+})
+;(async () => {
 
     const browser = await puppeteer.launch({
         args: ['--no-sandbox'],
