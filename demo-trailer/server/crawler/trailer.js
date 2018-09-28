@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
 
 const base = 'https://movie.douban.com'
-const Id = '3541415'
+const Id = '26979545'
 const detailUrl = `${base}/subject/`
 
 const sleep = time => new Promise(resolve => {
@@ -17,12 +17,13 @@ const sleep = time => new Promise(resolve => {
     await page.goto(detailUrl + Id, {
         waitUntil: "networkidle2" //网络空闲的时候执行
     })
+    console.log(detailUrl + Id);
 
     await sleep(1000)
     const result = await page.evaluate(_ => {
         var $ = window.$
         var item = $('.related-pic-video')
-        if(item) {
+        if(item && item.length) {
             let link = item.attr('href')
             let cover = (item.attr('style') || '').match(/\((\S*)\)/)[1]
             return {
