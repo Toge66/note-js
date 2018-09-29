@@ -14,18 +14,11 @@ const uploadToQiniu = (url, key) => {
     return new Promise((resolve, reject) => {
         bucketManager.fetch(url, bucket, key, (err, respBody, respInfo) => {
             if (err) {
-                console.log(err);
                 reject(err)
               } else {
                 if (respInfo.statusCode == 200) {
-                  console.log(respBody.key);
-                  console.log(respBody.hash);
-                  console.log(respBody.fsize);
-                  console.log(respBody.mimeType);
-                  resolve(respoBody.key)
+                  resolve(respBody.key)
                 } else {
-                  console.log(respInfo.statusCode);
-                  console.log(respBody);
                   reject(respInfo)
                 }
               }
@@ -44,9 +37,9 @@ const uploadToQiniu = (url, key) => {
     }]
     movies.forEach(async (item) => {
         try{
-            const videoQiniuKey = uploadToQiniu(item.video, nanoid() + '.mp4')
-            const coverQiniuKey = uploadToQiniu(item.video, nanoid() + '.jpg')
-            const posterQiniuKey = uploadToQiniu(item.poster, nanoid() + '.jpg')
+            const videoQiniuKey = await uploadToQiniu(item.video, nanoid())
+            const coverQiniuKey = await uploadToQiniu(item.cover, nanoid())
+            const posterQiniuKey = await uploadToQiniu(item.poster, nanoid())
 
             if(videoQiniuKey) {
                 item.videoQiniuKey = videoQiniuKey
