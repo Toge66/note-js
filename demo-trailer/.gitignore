@@ -38,6 +38,7 @@ dist/
 dist2/
 */dist/
 */dist2/
+server/config/index.js
 
 lib
 node_modules
