@@ -25,7 +25,6 @@ async function fetchMovie(item) {
             const movieData = JSON.parse(m)
         }
         catch {
-
         }
         console.log(m);
     })
