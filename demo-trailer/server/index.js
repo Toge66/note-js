@@ -4,11 +4,12 @@ const app = new Koa()
 const views = require('koa-views')
 const { resolve } = require('path')
 const { connect, initSchema } = require('./database/init')
+const mongoose = require('mongoose')
 
 ;(async () => {
   await connect()
   initSchema()
-
+  require('./tasks/movie-list')
 })()
 app.use(logger())
 app.use(views(resolve(__dirname,'./views'),{

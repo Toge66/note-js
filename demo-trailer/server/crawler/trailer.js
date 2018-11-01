@@ -49,7 +49,7 @@ const sleep = time => new Promise(resolve => {
         })
     }
     const data = {
-        id:Id,
+        doubanId:Id,
         cover:result.cover,
         video
     }

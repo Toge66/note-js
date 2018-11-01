@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
-const db = 'mongodb://localhost/trailer'
+const db = 'mongodb://192.168.3.63:27017/trailer'
 const glob = require('glob')
-const { resolve } = require('path')
+const { resolve:r } = require('path')
 
 mongoose.Promise = global.Promise
 
 exports.initSchema = () => {
-    glob.sync(resolve(__dirname,'./schema','**/*.js')).forEach(require)
+    glob.sync(r(__dirname,'./schema','**/*.js')).forEach(require)
 }
 
 function connect () {
@@ -38,12 +38,8 @@ exports.connect = () => {
             }
         })
         mongoose.connection.once('open', () => {
-            // const Dog = mongoose.model('Dog',{name:String})
-            // const a = new Dog({name: 'xiaohei'})
-
-            // a.save().then(() => {
-            //     console.log('save sucess')
-            // })
+            mongoose.model('Dog',{name:String})
+            require('./schema/movie')
             resolve()
             console.log('open Sucess')
         })

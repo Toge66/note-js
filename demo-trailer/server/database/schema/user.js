@@ -40,7 +40,7 @@ const userSchema = new Schema({
     }
 })
 
-userSchema.pre('save', next => {
+userSchema.pre('save', function(next) {
     if(this.isNew) {
         this.meta.createAt = this.meta.updateAt = Date.now()
     }else {
@@ -49,15 +49,15 @@ userSchema.pre('save', next => {
     next()
 })
 
-userSchema.virtual('isLocked').get(() => {
+userSchema.virtual('isLocked').get(function() {
     return !!(this.lockUntil && this.lockUntil > Date.now())
 })
 
-userSchema.pre('save', next => {
+userSchema.pre('save', function(next) {
     if(!this.isModified('password')) return next()
-    bcrypt.getSalt(SALT_WORK_FACTOR, (err, salt) => {
+    bcrypt.getSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next()
-        bcrypt.hash(this.password, salt, (error, hashPwd) => {
+        bcrypt.hash(this.password, salt, function (error, hashPwd) {
             if(error) return next()
             this.password = hashPwd
             next()
@@ -66,16 +66,16 @@ userSchema.pre('save', next => {
 })
 
 userSchema.methods = {
-    comparePwd: (_pwd, pwd) => {
-        return new Promise((resolve, reject) => {
-            bcrypt.compare(_pwd, pwd, (err, isMatch) => {
+    comparePwd: function(_pwd, pwd) {
+        return new Promise(function(resolve, reject) {
+            bcrypt.compare(_pwd, pwd, function(err, isMatch) {
                 if (!!err) return reject(err)
                 resolve(isMatch)
             })
         })
     },
     inLogininAttepts: (user) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(function(resolve, reject) {
             if(this.lockUntil && this.lockUntil < Date.now()) {
                 const update = {
                     $set: {
@@ -85,7 +85,7 @@ userSchema.methods = {
                         lockUntil: 1
                     }
                 }
-                this.update(update, err => {
+                this.update(update, function(err) {
                     if(err) return reject(err)
                     resolve(true)
                 })
@@ -100,7 +100,7 @@ userSchema.methods = {
                         lockUntil: Date.now() + LOCK_TIME
                     }
                 }
-                this.update(update, err => {
+                this.update(update, function(err) {
                     if(err) return reject(err)
                     resolve(true)
                 })

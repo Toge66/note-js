@@ -19,7 +19,7 @@ const sleep = time => new Promise(resolve => {
 
     await page.waitForSelector('.more')
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 1; i++) {
         await sleep(2000)
         await page.click('.more')
     }
@@ -31,12 +31,12 @@ const sleep = time => new Promise(resolve => {
         if (items.length) {
             items.each((index, item) => {
                 let it = $(item)
-                let id = it.find('div').data('id')
+                let doubanId = it.find('div').data('id')
                 let title = it.find('.title').text()
                 let rate = Number(it.find('.rate').text())
                 let poster = it.find('img').attr('src').replace('s_ratio', 'l_ratio')
                 links.push({
-                    id,
+                    doubanId:(doubanId || '').toString(),
                     title,
                     rate,
                     poster
