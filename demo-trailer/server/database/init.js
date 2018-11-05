@@ -38,8 +38,6 @@ exports.connect = () => {
             }
         })
         mongoose.connection.once('open', () => {
-            mongoose.model('Dog',{name:String})
-            require('./schema/movie')
             resolve()
             console.log('open Sucess')
         })

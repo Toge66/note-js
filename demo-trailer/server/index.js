@@ -9,7 +9,8 @@ const mongoose = require('mongoose')
 ;(async () => {
   await connect()
   initSchema()
-  require('./tasks/movie-list')
+  // require('./tasks/movie-list')
+  require('./tasks/trailer')
 })()
 app.use(logger())
 app.use(views(resolve(__dirname,'./views'),{

@@ -24,11 +24,15 @@ const {
         data.forEach(async item => {
             let movie = await Movie.findOne({
                 doubanId: item.doubanId
-            }).exec()
-            
+            })
             if(!movie) {
                 movie = new Movie(item)
-                movie.save()
+                console.log(movie)
+                try {
+                    await movie.save()
+                }catch(e) {
+                    console.log(e)
+                }
             }
         });
     })
