@@ -47,6 +47,7 @@ movieSchema.pre('save', function(next) {
     }else {
         this.meta.updateAt = Date.now()
     }
+    next()
 })
 
 mongoose.model('Movie', movieSchema)
