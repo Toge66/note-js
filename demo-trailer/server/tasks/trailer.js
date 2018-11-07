@@ -33,6 +33,7 @@ const {
         console.log('exit', code);
     })
     child.on('message', async data => {
+        
         const {
             doubanId,
             video,
@@ -44,6 +45,7 @@ const {
         if (video) {
             movie.video = video
             movie.cover = cover
+            await movie.save()
         } else {
             await movie.remove()
             const movieTypes = movie.movieTypes
@@ -64,8 +66,6 @@ const {
                 }
             }
         }
-        console.log('message', data);
     })
-    console.log(movies)
     child.send(movies)
 })()

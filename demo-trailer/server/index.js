@@ -23,6 +23,7 @@ app.use(async (ctx, next) => {
       second: "koa-view test"
     } 
   })
+  next()
 })
 
 app.listen(4455)

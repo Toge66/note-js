@@ -13,9 +13,10 @@ process.on('message', async movies => {
         dumpio: false
     })
     const page = await browser.newPage()
-
-    movies.forEach(async element => {
+    for (let i = 0; i < movies.length; i++) {
+        const element = movies[i]
         const {doubanId} = element
+        
         await page.goto(detailUrl + doubanId, {
             waitUntil: "networkidle2" //网络空闲的时候执行
         })
@@ -51,12 +52,12 @@ process.on('message', async movies => {
             })
         }
         const data = {
-            doubanId:Id,
+            doubanId,
             cover:result.cover,
             video
         }
         process.send(data)
-    });
+    }
     browser.close()
     process.exit(0)
 })

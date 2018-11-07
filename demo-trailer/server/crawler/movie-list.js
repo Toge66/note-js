@@ -15,13 +15,15 @@ const sleep = time => new Promise(resolve => {
         waitUntil: "networkidle2" //网络空闲的时候执行
     })
 
-    // await sleep(3000)
+    await sleep(3000)
 
     await page.waitForSelector('.more')
 
-    for (let i = 0; i < 1; i++) {
-        await sleep(2000)
+    for (let i = 0; i < 30; i++) {
+        console.log(i);
+        
         await page.click('.more')
+        await sleep(2000)
     }
 
     const result = await page.evaluate(_ => {
@@ -36,7 +38,7 @@ const sleep = time => new Promise(resolve => {
                 let rate = Number(it.find('.rate').text())
                 let poster = it.find('img').attr('src').replace('s_ratio', 'l_ratio')
                 links.push({
-                    doubanId:(doubanId || '').toString(),
+                    doubanId,
                     title,
                     rate,
                     poster
@@ -45,8 +47,8 @@ const sleep = time => new Promise(resolve => {
         }
         return links
     })
-
     browser.close()
     process.send(result)
+    await sleep(2000)
     process.exit(0)
 })()

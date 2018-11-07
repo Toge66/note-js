@@ -20,19 +20,14 @@ const {
         const err = code === 0 ? null : new Error('exit code' + code)
         console.log('exit', code);
     })
-    child.on('message', data => {
+    child.on('message', async data => {
         data.forEach(async item => {
             let movie = await Movie.findOne({
                 doubanId: item.doubanId
             })
-            if(!movie) {
+            if (!movie) {
                 movie = new Movie(item)
-                console.log(movie)
-                try {
-                    await movie.save()
-                }catch(e) {
-                    console.log(e)
-                }
+                await movie.save()
             }
         });
     })
