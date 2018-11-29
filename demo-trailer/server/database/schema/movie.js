@@ -9,10 +9,10 @@ const movieSchema = new Schema({
         unique: true,
         type: String
     },
-    categorys: {
+    categorys: [{
         type: ObjectId,
         ref: 'Category'
-    },
+    }],
     rate: Number,
     title: String,
     summary: String,
@@ -28,7 +28,7 @@ const movieSchema = new Schema({
     movieTypes: [String],
     pubdate: Mixed,
     year: Number,
-    tag: [Array],
+    tags: [Array],
     meta: {
         createAt: {
             type: Date,
